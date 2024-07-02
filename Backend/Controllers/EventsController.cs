@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Model;
 
-namespace backend.Controllers;
+namespace Backend.Controllers;
 
 [ApiController] [Route("api/[controller]")] 
 public class EventsController : ControllerBase {
@@ -25,7 +25,7 @@ public class EventsController : ControllerBase {
         return Conflict();
     }
     [HttpPut("{id}")] public IActionResult Update(int? id, [FromBody] Event e) {
-        var dbEvent = context.EventList!.AsNoTracking().FirstOrDefault(x => x.Id == e.Id);
+        var dbEvent = context.EventList!.AsNoTracking().FirstOrDefault(eventInDB => eventInDB.Id == e.Id);
         if (id != e.Id || dbEvent == null) return NotFound();     
         context.Update(e);
         context.SaveChanges();
