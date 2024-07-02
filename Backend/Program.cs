@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Backend.Model;
+using backend.Model;
 
 
 var builder = WebApplication.CreateBuilder(args);

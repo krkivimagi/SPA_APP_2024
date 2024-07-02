@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Backend.Model;
+using backend.Model;
 
-namespace Backend.Controllers;
+namespace backend.Controllers;
 
 [ApiController] [Route("api/[controller]")] 
 public class EventsController : ControllerBase {

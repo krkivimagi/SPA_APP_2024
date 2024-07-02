@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-namespace Backend.Model;
+namespace backend.Model;
 
 public class DataContext: DbContext {
     public DataContext(DbContextOptions<DataContext> options): base(options) {}

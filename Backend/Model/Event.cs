@@ -1,4 +1,4 @@
-namespace Backend.Model;
+namespace backend.Model;
 
 public record Event{
     public int Id {get; set;}
