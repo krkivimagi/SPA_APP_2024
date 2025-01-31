@@ -5,12 +5,21 @@ using backend.Model;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DataContext>(OptionsBuilderConfigurationExtensions => 
-OptionsBuilderConfigurationExtensions.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder => {
+    builder
+    .SetIsOriginAllowed(_ => true)
+    .AllowCredentials()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
@@ -21,6 +30,7 @@ EnsureDatabaseCreated(app.Services);
 if (app.Environment.IsDevelopment()){
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("MyPolicy");
 }
 
 app.UseHttpsRedirection();
